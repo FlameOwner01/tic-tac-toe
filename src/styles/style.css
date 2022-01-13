@@ -1,0 +1,109 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.container{
+    display: block;
+    height: 200px;
+    width: 200px;
+    margin: 10% 40% auto;
+    border-radius: 5%;
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+    
+}
+h2{
+    margin-left: 23%;
+    padding: 10px;
+    color:darkslateblue;
+}
+.input {
+    margin-left: 13%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+.btn{
+    padding: 5px;
+    margin-left: 40%;
+    margin-top: 6%;
+    background-color:darkslateblue;
+    color: chartreuse;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+
+table{
+    user-select: none;
+    display: grid;
+    margin-left: 33%;
+    margin-top: 3%;
+    border: 2px solid black;
+    width: 333px;
+    height: 345px;
+    grid-column-gap: 2px;
+    grid-row-gap: 2px;
+}
+
+th{
+    padding: 0;
+    width: 111px;
+    height: 111px;
+    border: 2px solid green;
+}
+
+.heading{
+    margin-left: 36%;
+    padding: 5px;
+}
+
+.Navigation{
+    margin-top: 10px;
+    margin-left: 30%;
+    border: 1px solid black;
+    width: fit-content;
+    background-color: azure;
+}
+h1{
+    display: inline-block;
+    padding: 7px;
+    border: 0.5px solid green;
+}
+h3{
+    font-size: 28px;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.again{
+    color: white;
+    width: 200px;
+    height: 40px;
+    border: 1px solid black;
+    background-color: blue;
+    align-items: center;
+    justify-content: center;
+    margin-left: 15%;
+    margin-top: 10%;
+}
+.winner{
+    margin-left: 22%;
+}
+.endgame{
+    width: 300px;
+    height: 200px;
+    margin-left: 37%;
+    margin-top: 10%;
+    border: 2px solid black;
+
+}
+
+.history-tab{
+    width: 200px;
+    height: 100px;
+    background-color: darkseagreen;
+    color: black;
+}
