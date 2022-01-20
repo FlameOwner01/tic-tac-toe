@@ -3,7 +3,7 @@ import o from "./images/ox.png";
 import x from "./images/X.jpg";
 
 
-const Board = ({turn, setTurns, setScore, resetStatus}) => {
+const Board = ({turn, setTurns, getScore, resetStatus}) => {
     
     const [tableO, setTableO] = useState([]);
     const [tableX, setTableX] = useState([]);
@@ -65,11 +65,6 @@ const itsFull = () =>{
     }
 }
 
-
-  
-
-
-
         if(tableO.includes(1) && tableO.includes(2) && tableO.includes(3)){
             winpl2 = true;
         }else if(tableO.includes(4) && tableO.includes(5) && tableO.includes(6)){
@@ -109,23 +104,29 @@ const itsFull = () =>{
         useEffect(() =>{
             if(full || winpl1 || winpl2){
                 if(winpl1){
-                  setScore("1");
+                  getScore("1");
+                  
                 }else if(winpl2){
-                    setScore("2");
+                    getScore("2");
+                   
                 }else{
-                   setScore("3");
+                   getScore("3");
+                   
                 }
             }
         }, [full, winpl1, winpl2])
 
-       const reset = () =>{
-           if(resetStatus){
-               for(let i = 0; i < tableO.length + tableX.length; i++ ){
-                   document.getElementById(i).value = null;
-                   document.getElementById(i).innerHTML = null;
-               }
-           }
-       }
+      const reset = () =>{
+        if(resetStatus){
+            for(let i = 0; i < tableO.length + tableX.length; i++ ){
+                document.getElementById(i).value = null;
+                document.getElementById(i).innerHTML = null;
+            }
+            
+        }
+      }
+          
+       
       
         
 
@@ -180,6 +181,7 @@ return(
             </tr>
             </tbody>
         </table>
+       
     </div>  
 )
 }
