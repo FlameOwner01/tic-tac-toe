@@ -7,7 +7,7 @@ import Endgame from "./components/Endgame.jsx";
 
 function App() {
 
-  const [login, setLogin] = useState(false);
+  const [game, setGame] = useState(false);
   const [playerOne, setPlayerOne] = useState("");
   const [playerTwo, setPlayerTwo] = useState("");
   const [showLogin, setShowLogin] = useState(true);
@@ -16,45 +16,51 @@ function App() {
   
 
   const triggerLogin = () =>{
-    setLogin(true);
+    setGame(true);
     setShowLogin(false);
    }
 
   const gettingPlayers = (temp1, temp2) => {
     setPlayerOne(temp1);
     setPlayerTwo(temp2);
-    setLogin(true);
+    setGame(true);
    }
 
    const setScore = () =>{
      setEnd(true);
-     setLogin(false)
+   
    }
 
    const reset = () =>{
-    setEnd(false);
-    setLogin(true);
+    setEnd(true);
+    setGame(false);
+    	
   } 
+  const newGame = () =>{
+    setGame(true);
+    setEnd(false);
+  }
   
   return (
     <div>
          
         {
-         showLogin ? <Login login={login} triggerLogin={triggerLogin} gettingPlayers={gettingPlayers} /> : null
+         showLogin ? <Login game={game} triggerLogin={triggerLogin} gettingPlayers={gettingPlayers} /> : null
         }
           {
-          login ? <Game
+          game ? <Game
            playerOne={playerOne} 
            playerTwo={playerTwo}
            winner={winner}
            setWinner={setWinner}
            setScore={setScore}
+           reset={reset}
            /> : null 
         }
         {
           end ? <Endgame
           	winner={winner}
-            reset={reset}
+            newGame={newGame}
           /> : null
         }
     </div>

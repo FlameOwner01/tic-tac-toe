@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const Endgame = ({winner, reset}) =>{
+const Endgame = ({winner, newGame}) =>{
   
     
 
@@ -23,7 +23,7 @@ const Endgame = ({winner, reset}) =>{
                 winner === "draw" ? <h3 className="winner">{winner}!!</h3> : <h3 className="winner">You win {winner}!!</h3>
             }
             <button className="again" id = "reset" onClick={() =>{
-                reset();
+                newGame();
             }}>Wanna try again!</button>
 
             <button className="again" id ="history" onClick={()=>{

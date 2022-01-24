@@ -3,7 +3,7 @@ import o from "./images/ox.png";
 import x from "./images/X.jpg";
 
 
-const Board = ({turn, setTurns, getScore, resetStatus}) => {
+const Board = ({turn, setTurns, getScore, resetStatus, historySetter}) => {
     
     const [tableO, setTableO] = useState([]);
     const [tableX, setTableX] = useState([]);
@@ -30,7 +30,7 @@ const inputMark = (n) =>{
                 element.appendChild(img);
                 setTableX(tableX => [...tableX, n]);
                 element.value = "occupied";
-                setTurns(1);
+                setTurns(2);
             }
         }else{
             if(element.value  ==="occupied"){
@@ -39,7 +39,7 @@ const inputMark = (n) =>{
                 element.appendChild(img2);
                 setTableO(tableO => [...tableO, n]);
                 element.value = "occupied";
-                setTurns(2);
+                setTurns(1);
             }   
         }
     }else{
@@ -105,25 +105,24 @@ const itsFull = () =>{
             if(full || winpl1 || winpl2){
                 if(winpl1){
                   getScore("1");
-                  
+            
                 }else if(winpl2){
                     getScore("2");
-                   
+                  
                 }else{
                    getScore("3");
-                   
+                  
                 }
+                historySetter();
+                reset();
             }
         }, [full, winpl1, winpl2])
 
       const reset = () =>{
-        if(resetStatus){
-            for(let i = 0; i < tableO.length + tableX.length; i++ ){
+            for(let i = 1 ; i < 10; i++ ){
                 document.getElementById(i).value = null;
                 document.getElementById(i).innerHTML = null;
             }
-            
-        }
       }
           
        
