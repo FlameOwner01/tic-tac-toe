@@ -1,21 +1,15 @@
 import { useState } from "react";
 
-const Endgame = ({winner, newGame}) =>{
-  
-    
+const Endgame = ({winner, newGame, history}) =>{
 
     const [show, setShow] = useState(false);
-    
-
     
     const displayHistory = () => {  
         
         setShow(true);
-      
+      console.log(history);
     }
     
- 
-
    
     return(
         <div className = "endgame">
@@ -33,10 +27,9 @@ const Endgame = ({winner, newGame}) =>{
  
                 <div className="endgame">
                     {
-                        show ? 
-                                <div>
-                                    History
-                                </div>
+                        show ? <div>
+                               history
+                            </div>
                         : null
                     }
                 </div>

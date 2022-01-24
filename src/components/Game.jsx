@@ -3,36 +3,13 @@ import { useState, useEffect } from "react";
 import Navbar from "./Navbar.jsx";
 
 
-
-
-const Game = ({playerOne, playerTwo, winner, setWinner, setScore,reset }) => {
+const Game = ({playerOne, playerTwo, winner, setScore, reset, getHs }) => {
   	
       const [turn, setTurn] = useState(1);
       const [resetStatus, setResetStatus] = useState(false);
-      const [history, setHistory] = useState([]);
       const [player1, setPlayer1] = useState(0);
       const [player2, setPlayer2] = useState(0);
       const [draw, setDraw] = useState(0);
-    
-      let date = new Date();
-      let Month = date.getMonth()+1;
-      let Day = date.getDate();
-      let Hours = date.getHours();
-      let Minutes = date.getMinutes();
-
-     
-    if(Minutes < 10){
-      Minutes = "0" +  Minutes;
-    }
-    
-    if(Day < 10){
-      Day = "0" +  Day;
-    }
-    if(Month < 10){
-      Month = "0" +  Month;
-    }
-
-
 
     const setTurns = (e) =>{
       if(e === 1){
@@ -45,51 +22,29 @@ const Game = ({playerOne, playerTwo, winner, setWinner, setScore,reset }) => {
   
    
 const getScore = (score) =>{
-  
-  setScore();
+
     if(score === "1"){
-      setWinner(playerOne);
+      setScore(score);
       setPlayer1(player1+1);
       setResetStatus(true);
       reset();
     }else if(score === "2"){
-      setWinner(playerTwo);
+      setScore(score);
       setPlayer2(player2+1);
       setResetStatus(true);
       reset();
     }else if (score === "3"){
-      setWinner("draw");
+      setScore(score);
       setDraw(draw+1);
       setResetStatus(true);
       reset();
     }
-  
+
 }
 
-    const historySetter = () =>{
-      console.log("Day: ",Day );
-      setHistory([...history, {
-        id: date.getTime(),
-        day: Day,
-        month: Month,
-        hours: Hours,
-        minute: Minutes,
-        pl1: playerOne,
-        pl2: playerTwo,
-        whoWon: winner
-     }])
-      console.log(history);
+    const getHis = (history) =>{
+      getHs(history);
     }
-     
-
-     useEffect(() => {
-        localStorage.setItem("history", JSON.stringify(history));
-     }, [history])
-
-
-   
-    
-
     return (
     <div>
         <nav className="Navigation">
@@ -110,7 +65,10 @@ const getScore = (score) =>{
             setTurns={setTurns}
             getScore={getScore}
             resetStatus = {resetStatus}
-            historySetter={historySetter}
+            playerOne={playerOne}
+            playerTwo={playerTwo}
+            winner={winner}
+            getHis={getHis}
             />    
     </div>
       

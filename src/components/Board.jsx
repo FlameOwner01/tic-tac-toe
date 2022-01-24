@@ -3,21 +3,38 @@ import o from "./images/ox.png";
 import x from "./images/X.jpg";
 
 
-const Board = ({turn, setTurns, getScore, resetStatus, historySetter}) => {
+const Board = ({turn, setTurns, getScore, resetStatus, playerOne, playerTwo, winner, getHis}) => {
     
     const [tableO, setTableO] = useState([]);
     const [tableX, setTableX] = useState([]);
     const [full, setFull] = useState(false);
-
-
+    const [history, setHistory] = useState([]);
+    
+    let date = new Date();
+    let Month = date.getMonth()+1;
+    let Day = date.getDate();
+    let Hours = date.getHours();
+    let Minutes = date.getMinutes();
+     
+    if(Minutes < 10){
+        Minutes = "0" +  Minutes;
+      }
+      
+      if(Day < 10){
+        Day = "0" +  Day;
+      }
+      if(Month < 10){
+        Month = "0" +  Month;
+      }
+      
 let img = document.createElement("img");
 let img2 = document.createElement("img");
 img2.src = o;
 img.src = x;
 
-var winpl1, winpl2 = false;
+var winpl1 =false, winpl2 = false;
 var tempArray = [];
-
+var won = false;
 
 const inputMark = (n) =>{
     let element = document.getElementById(n);
@@ -63,7 +80,26 @@ const itsFull = () =>{
     if(tempArray.length === 9){
         setFull(true);
     }
+} 
+
+ if(tableX.includes(1) && tableX.includes(2) && tableX.includes(3)){
+    winpl1 = true;
+}else if(tableX.includes(4) && tableX.includes(5) && tableX.includes(6)){
+    winpl1 = true;
+}else if(tableX.includes(7) && tableX.includes(8) && tableX.includes(9)){
+    winpl1 = true;
+}else if(tableX.includes(1) && tableX.includes(5) && tableX.includes(9)){
+    winpl1 = true;
+}else if(tableX.includes(3) && tableX.includes(5) && tableX.includes(7)){
+    winpl1 = true;
+}else if(tableX.includes(1) && tableX.includes(4) && tableX.includes(7)){
+    winpl1=true;
+}else if(tableX.includes(2) && tableX.includes(5) && tableX.includes(8)){
+    winpl1 = true;
+}else if(tableX.includes(3) && tableX.includes(6) && tableX.includes(9)){
+    winpl1 = true;
 }
+
 
         if(tableO.includes(1) && tableO.includes(2) && tableO.includes(3)){
             winpl2 = true;
@@ -83,50 +119,60 @@ const itsFull = () =>{
             winpl2 = true;
         }
 
-        if(tableX.includes(1) && tableX.includes(2) && tableX.includes(3)){
-            winpl1 = true;
-        }else if(tableX.includes(4) && tableX.includes(5) && tableX.includes(6)){
-            winpl1 = true;
-        }else if(tableX.includes(7) && tableX.includes(8) && tableX.includes(9)){
-            winpl1 = true;
-        }else if(tableX.includes(1) && tableX.includes(5) && tableX.includes(9)){
-            winpl1 = true;
-        }else if(tableX.includes(3) && tableX.includes(5) && tableX.includes(7)){
-            winpl1 = true;
-        }else if(tableX.includes(1) && tableX.includes(4) && tableX.includes(7)){
-            winpl1=true;
-        }else if(tableX.includes(2) && tableX.includes(5) && tableX.includes(8)){
-            winpl1 = true;
-        }else if(tableX.includes(3) && tableX.includes(6) && tableX.includes(9)){
-            winpl1 = true;
-        }
-
+      
         useEffect(() =>{
             if(full || winpl1 || winpl2){
                 if(winpl1){
                   getScore("1");
-            
+                  won = true;
                 }else if(winpl2){
-                    getScore("2");
-                  
+                  getScore("2");
+                  won = true;
+               }else if(full){
+                  getScore("3");
+                  won = true;
                 }else{
-                   getScore("3");
-                  
+                   
+                    return;
                 }
-                historySetter();
+                
+               console.log("won: ",won);
                 reset();
             }
-        }, [full, winpl1, winpl2])
+            if( !won ){
+                setHistory([...history, {
+                    id: date.getTime(),
+                    month: Month,
+                    day: Day,
+                    hours: Hours,
+                    minutes: Minutes,
+                    player1: playerOne,
+                    player2: playerTwo,
+                    Winner: winner
+                }])
+            }
+         
+            console.log("history, ",history);
+        }, [full, winpl1, winpl2]);
 
+
+       
+      
       const reset = () =>{
+        
+       
             for(let i = 1 ; i < 10; i++ ){
                 document.getElementById(i).value = null;
                 document.getElementById(i).innerHTML = null;
             }
       }
-          
+
+     
        
-      
+      useEffect(() => {
+        getHis(history);
+        localStorage.setItem("history", JSON.stringify(history));
+     }, [history])
         
 
     

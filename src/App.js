@@ -13,6 +13,7 @@ function App() {
   const [showLogin, setShowLogin] = useState(true);
   const [end, setEnd] = useState(false);
   const [winner, setWinner] = useState("");
+  let history = [];
   
 
   const triggerLogin = () =>{
@@ -26,11 +27,24 @@ function App() {
     setGame(true);
    }
 
-   const setScore = () =>{
+   const setScore = (score) =>{
+     if(score === "1"){
+       console.log("playerOne: ", playerOne);
+       setWinner(playerOne);
+       console.log("winner: ",winner);
+     }else if(score === "2"){
+       setWinner(playerTwo);
+     }else{
+       setWinner("draw");
+     }
+    
      setEnd(true);
    
    }
-
+   const getHs = (hs) =>{
+     history = hs;
+   }
+  
    const reset = () =>{
     setEnd(true);
     setGame(false);
@@ -52,15 +66,16 @@ function App() {
            playerOne={playerOne} 
            playerTwo={playerTwo}
            winner={winner}
-           setWinner={setWinner}
            setScore={setScore}
-           reset={reset}
+           reset={reset}đ
+           getHs={getHs}
            /> : null 
         }
         {
           end ? <Endgame
           	winner={winner}
             newGame={newGame}
+            history={history}
           /> : null
         }
     </div>
