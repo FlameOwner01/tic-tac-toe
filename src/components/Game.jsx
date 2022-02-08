@@ -1,53 +1,38 @@
 import Board from "./Board.jsx";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Navbar from "./Navbar.jsx";
 
 
-const Game = ({playerOne, playerTwo, winner, setScore, reset, getHs }) => {
+const Game = ({playerOne, playerTwo, setScore, getHs, sameNewGame, setSameNewGame }) => {
   	
-      const [turn, setTurn] = useState(1);
-      const [resetStatus, setResetStatus] = useState(false);
-      const [player1, setPlayer1] = useState(0);
-      const [player2, setPlayer2] = useState(0);
-      const [draw, setDraw] = useState(0);
-
-    const setTurns = (e) =>{
-      if(e === 1){
-        setTurn(1);
+  const [xIsNext, setXisNext] = useState(true);
+  const [player1, setPlayer1] = useState(0);
+  const [player2, setPlayer2] = useState(0);
+  const [draw, setDraw] = useState(0);
+    const setTurns = (is) =>{
         
-      }else{
-        setTurn(2);
-      }
+        if(is){
+          setXisNext(true);
+        }else{
+          setXisNext(!xIsNext);
+        }
     }
   
    
-const getScore = (score) =>{
-
-    if(score === "1"){
-      setScore(score);
-      setPlayer1(player1+1);
-      setResetStatus(true);
-      reset();
-    }else if(score === "2"){
-      setScore(score);
-      setPlayer2(player2+1);
-      setResetStatus(true);
-      reset();
-    }else if (score === "3"){
-      setScore(score);
-      setDraw(draw+1);
-      setResetStatus(true);
-      reset();
-    }
-
+const getScore = (pl1, pl2, tie) =>{
+  setPlayer1(pl1);
+  setPlayer2(pl2);
+  setDraw(tie);
+  setScore();
 }
 
     const getHis = (history) =>{
       getHs(history);
     }
+
     return (
     <div>
-        <nav className="Navigation">
+         <nav className="Navigation">
             <Navbar 
             playerOne = {playerOne}
             playerTwo = {playerTwo}
@@ -57,18 +42,18 @@ const getScore = (score) =>{
             />
         </nav>
         {
-            turn === 1 ? <h3 className = "heading" >It's {playerOne}'s turn</h3> : <h3 className = "heading" >It's {playerTwo}'s turn</h3>
+            xIsNext ? <h3 className = "heading" >It's {playerOne}'s turn</h3> : <h3 className = "heading" >It's {playerTwo}'s turn</h3>
         }
 
           <Board
-            turn={turn}
+            xIsNext={xIsNext}
             setTurns={setTurns}
             getScore={getScore}
-            resetStatus = {resetStatus}
             playerOne={playerOne}
             playerTwo={playerTwo}
-            winner={winner}
             getHis={getHis}
+            sameNewGame={sameNewGame}
+            setSameNewGame = {setSameNewGame}
             />    
     </div>
       

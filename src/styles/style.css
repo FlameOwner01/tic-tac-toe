@@ -24,6 +24,7 @@ h2{
     margin-left: 13%;
     border: 2px solid black;
     border-radius: 10px;
+    width: 150px;
 }
 
 .btn{
@@ -93,17 +94,22 @@ h3{
     margin-left: 22%;
 }
 .endgame{
+    display: inline-block;
     width: 300px;
-    height: 200px;
-    margin-left: 37%;
-    margin-top: 10%;
+    height: 350px;
+    margin-top: 50px;
+    margin-left: 350px;
+    margin-bottom: 30px;
     border: 2px solid black;
 
 }
-
-.history-tab{
-    width: 200px;
-    height: 100px;
-    background-color: darkseagreen;
-    color: black;
+.endgame1{
+    display: inline-block;
+    position: fixed;
+    width: 300px;
+    height: 250px;
+    margin-top: 50px;
+    margin-bottom: -50px;
+    margin-left: 80px;
+    border: 2px solid black;
 }

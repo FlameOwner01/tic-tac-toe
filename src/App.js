@@ -12,9 +12,8 @@ function App() {
   const [playerTwo, setPlayerTwo] = useState("");
   const [showLogin, setShowLogin] = useState(true);
   const [end, setEnd] = useState(false);
-  const [winner, setWinner] = useState("");
-  let history = [];
-  
+  const [history, setHistory] = useState([]);
+  const [sameNewGame, setSameNewGame] = useState(false);
 
   const triggerLogin = () =>{
     setGame(true);
@@ -27,32 +26,28 @@ function App() {
     setGame(true);
    }
 
-   const setScore = (score) =>{
-     if(score === "1"){
-       console.log("playerOne: ", playerOne);
-       setWinner(playerOne);
-       console.log("winner: ",winner);
-     }else if(score === "2"){
-       setWinner(playerTwo);
-     }else{
-       setWinner("draw");
-     }
-    
+   const setScore = () =>{
      setEnd(true);
-   
    }
+
    const getHs = (hs) =>{
-     history = hs;
+     setHistory([...hs]);
    }
   
-   const reset = () =>{
-    setEnd(true);
-    setGame(false);
-    	
-  } 
-  const newGame = () =>{
+   
+  const newSameGame = () =>{
+    setSameNewGame(true);
     setGame(true);
     setEnd(false);
+  }
+  const newGame = () =>{
+    setSameNewGame(true);
+    setGame(false);
+    setEnd(false);
+    setShowLogin(true);
+    setPlayerOne("");
+    setPlayerTwo("");
+    setHistory([]);
   }
   
   return (
@@ -65,17 +60,17 @@ function App() {
           game ? <Game
            playerOne={playerOne} 
            playerTwo={playerTwo}
-           winner={winner}
            setScore={setScore}
-           reset={reset}đ
            getHs={getHs}
+           sameNewGame={sameNewGame}
+           setSameNewGame ={setSameNewGame}
            /> : null 
         }
         {
           end ? <Endgame
-          	winner={winner}
-            newGame={newGame}
+            newSameGame={newSameGame}
             history={history}
+            newGame={newGame}
           /> : null
         }
     </div>

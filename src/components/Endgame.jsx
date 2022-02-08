@@ -1,39 +1,48 @@
 import { useState } from "react";
 
-const Endgame = ({winner, newGame, history}) =>{
+const Endgame = ({ newSameGame, history, newGame}) =>{
 
     const [show, setShow] = useState(false);
-    
+
     const displayHistory = () => {  
-        
         setShow(true);
-      console.log(history);
     }
     
    
     return(
+        <div>
         <div className = "endgame">
             {
-                winner === "draw" ? <h3 className="winner">{winner}!!</h3> : <h3 className="winner">You win {winner}!!</h3>
+               history[0]  === "draw" ? <h3 className="winner">!!</h3> : <h3 className="winner">You win !!</h3>
             }
             <button className="again" id = "reset" onClick={() =>{
-                newGame();
+                newSameGame();
             }}>Wanna try again!</button>
 
             <button className="again" id ="history" onClick={()=>{
                 
                 displayHistory();
             }}>Show history</button>
- 
-                <div className="endgame">
-                    {
-                        show ? <div>
-                               history
-                            </div>
-                        : null
-                    }
-                </div>
+             <button className="again" id = "reset" onClick={() =>{
+                newGame();
+            }}>New Game</button>
+            
         </div>
+        <div className="endgame1" id="hs">
+                    
+                
+        {
+            show ? 
+              history.map(({day, hour,id, minute,month, player1, player2, winner}) =>{
+                  return (<div key ={id}>{month}.{day}  {hour}.{minute}  {player1}  vs  {player2}  {winner} is Winner!</div>
+                    )
+              })  
+            : null
+        }
+        </div>
+
+        </div>
+       
     )
 }
 
