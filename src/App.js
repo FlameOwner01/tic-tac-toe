@@ -1,7 +1,7 @@
 import Login from "./components/Login.jsx";
 import Game from "./components/Game.jsx";
 import "./styles/style.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Endgame from "./components/Endgame.jsx";
 
 
@@ -14,6 +14,7 @@ function App() {
   const [end, setEnd] = useState(false);
   const [history, setHistory] = useState([]);
   const [sameNewGame, setSameNewGame] = useState(false);
+
 
   const triggerLogin = () =>{
     setGame(true);
@@ -28,6 +29,7 @@ function App() {
 
    const setScore = () =>{
      setEnd(true);
+     
    }
 
    const getHs = (hs) =>{
@@ -48,8 +50,10 @@ function App() {
     setPlayerOne("");
     setPlayerTwo("");
     setHistory([]);
+    localStorage.removeItem("history");
   }
-  
+
+
   return (
     <div>
          
